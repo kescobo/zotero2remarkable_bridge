@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import List, Any, Dict
 
 
@@ -16,11 +17,13 @@ class TreeNode:
     @classmethod
     def from_zotero_item(cls, zot_item: Dict[str, Any]):
         data = zot_item.get("data", {})
+        path = data.get("path", "")
+        name = data.get("filename", "") or Path(path).name
         return TreeNode(
             handle=data["key"],
-            name=data.get("filename", ""),
+            name=name,
             type=data.get("itemType", ""),
             tags=data.get("tags", []),
-            path=data.get("path", ""),
+            path=path,
             metadata=data,
         )
