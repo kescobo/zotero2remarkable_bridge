@@ -53,14 +53,25 @@ Entries that have been synced back will have the tag "read" added to them, so yo
 
 ##### Running
 
-Whenever you want to run, you need to activate the virtual environment and run the program:
+The simplest way to run is via `poetry run`, which does not require activating the virtual environment:
 
 ```bash
-source $(poetry env info --path)/bin/activate
-python ./zotero2remarkable_bridge.py
+poetry run zrm
 # At first run, it will guide you through creating a working
 # config. It will help you setup authentication with Zotero, WebDAV (optional), and
 # reMarkable.
+```
+
+Alternatively, activate the virtual environment first and then run `zrm` directly:
+
+```bash
+# bash/zsh
+source $(poetry env info --path)/bin/activate
+
+# fish
+source (poetry env info --path)/bin/activate.fish
+
+zrm
 ```
 
 ##### Arguments
@@ -68,7 +79,7 @@ python ./zotero2remarkable_bridge.py
 The program accepts the following arguments:
 
 ```
-./zotero2remarkable_bridge.py [-m push|pull|both]
+zrm [-m push|pull|both]
 
 -m: Mode
 push: Only push to ReMarkable
