@@ -169,10 +169,8 @@ def sync_to_rm_filetree(
         logger.warning(f"No attachments found for item at {handle}")
         return
 
-    attachments = zotero_tree.list_children(handle)
-    attachments = [
-        attachment for attachment in attachments if attachment.name.endswith(".pdf")
-    ]
+    all_children = zotero_tree.list_children(handle)
+    attachments = [a for a in all_children if a.name.endswith(".pdf")]
     logger.info(f"Syncing {len(attachments)} attachments to reMarkable")
 
     all_attachments_synced = True
@@ -198,7 +196,7 @@ def sync_to_rm_filetree(
             all_attachments_synced = False
             logger.error(f"Error processing {attachment}: {str(e)}")
 
-    if all_attachments_synced:
+    if attachments and all_attachments_synced:
         zotero_tree.add_tags(handle, ["synced"])
         zotero_tree.remove_tags(handle, ["to_sync"])
 
