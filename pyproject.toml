@@ -16,6 +16,7 @@ pyzotero = "^1.6.11"
 remarks = { git = "https://github.com/Scrybbling-together/remarks", branch = "main" }
 jinja2 = "^3.1.6"
 pytest = "^8.0.0"
+lxml = "^6.0.2"
 
 [build-system]
 requires = ["poetry-core"]
